@@ -62,7 +62,7 @@
     background: color-mix(in srgb, var(--party-color, var(--red)) 8%, transparent);
   }
   .filter-logo {
-    width: 22px; height: 22px; border-radius: 50%;
+    width: 30px; height: 30px; border-radius: 50%;
     object-fit: cover; flex-shrink: 0;
     background: #eee;
   }
@@ -91,7 +91,7 @@
     border-bottom: 2px solid var(--party-color, var(--border));
   }
   .party-logo-circle {
-    width: 44px; height: 44px; border-radius: 50%;
+    width: 56px; height: 56px; border-radius: 50%;
     background: var(--party-color, #eee);
     display: flex; align-items: center; justify-content: center;
     font-size: 10px; font-weight: 900; color: #fff;
@@ -133,7 +133,7 @@
 <body>
 
 <div class="topbar">
-  <span>News24</span><div class="topbar-dot"></div><span>Investigative</span>
+  <span>News24</span><div class="topbar-dot"></div><span>Politics</span>
 </div>
 
 <div class="header-wrap">
@@ -161,13 +161,13 @@
 
 <script>
 const parties = [
-  { id:'anc',      name:'African National Congress',      abbr:'ANC',   color:'#007A4D', logo:'ANC.png',
+  { id:'anc',      name:'African National Congress',      abbr:'ANC',   color:'#00a651', logo:'ANC.png',
     members:[
       {name:'TBC',tbc:true},{name:'TBC',tbc:true},{name:'TBC',tbc:true},
       {name:'TBC',tbc:true},{name:'TBC',tbc:true},{name:'TBC',tbc:true},
       {name:'TBC',tbc:true},{name:'TBC',tbc:true},{name:'TBC',tbc:true}
     ]},
-  { id:'da',       name:'Democratic Alliance',            abbr:'DA',    color:'#003DA5', logo:'DA.png',
+  { id:'da',       name:'Democratic Alliance',            abbr:'DA',    color:'#055fa8', logo:'DA.png',
     members:[
       {name:'George Michalakis',role:'Parliamentary Leader'},
       {name:'Bax Nodada',role:'Deputy Chief Whip'},
@@ -175,40 +175,40 @@ const parties = [
       {name:'Karabo Khakhau',role:'Party national spokesperson'},
       {name:'Nazley Sharif'}
     ]},
-  { id:'mk',       name:'MK Party',                      abbr:'MK',    color:'#1a7a1a', logo:'MK.png',
+  { id:'mk',       name:'MK Party',                      abbr:'MK',    color:'#53ab47', logo:'MK.png',
     members:[
       {name:'John Hlophe',role:'Parliamentary Leader'},
       {name:'Mmabatho Mokoena-Zondi',role:'Chief Whip'},
       {name:'Dr Khanyisile Litchfield-Tshabalala'}
     ]},
-  { id:'eff',      name:'Economic Freedom Fighters',      abbr:'EFF',   color:'#CC0000', logo:'EFF.png',
+  { id:'eff',      name:'Economic Freedom Fighters',      abbr:'EFF',   color:'#af2022', logo:'EFF.png',
     members:[
       {name:'Julius Malema',role:'Party Leader'},
       {name:'TBC',tbc:true}
     ]},
-  { id:'pa',       name:'Patriotic Alliance',             abbr:'PA',    color:'#2d7a2d', logo:'PA.png',
+  { id:'pa',       name:'Patriotic Alliance',             abbr:'PA',    color:'#74db60', logo:'PA.png',
     members:[{name:'Marlon Daniels',role:'Chief Whip'}]},
-  { id:'ifp',      name:'Inkatha Freedom Party',          abbr:'IFP',   color:'#c8a800', logo:'IFP.png',
+  { id:'ifp',      name:'Inkatha Freedom Party',          abbr:'IFP',   color:'#dd1f26', logo:'IFP.png',
     members:[{name:'TBC',tbc:true}]},
-  { id:'atm',      name:'African Transformation Movement',abbr:'ATM',   color:'#5bc8e8', logo:'ATM.png',
+  { id:'atm',      name:'African Transformation Movement',abbr:'ATM',   color:'#8dd7f7', logo:'ATM.png',
     members:[{name:'Vuyo Zungula',role:'Parliamentary Leader'}]},
-  { id:'ffplus',   name:'Freedom Front Plus',             abbr:'FF+',   color:'#E07820', logo:'FF.png',
+  { id:'ffplus',   name:'Freedom Front Plus',             abbr:'FF+',   color:'#ff6602', logo:'FF.png',
     members:[{name:'TBC',tbc:true}]},
-  { id:'actionsa', name:'ActionSA',                       abbr:'ASA',   color:'#2eb82e', logo:'ActionSA.png',
+  { id:'actionsa', name:'ActionSA',                       abbr:'ASA',   color:'#01b714', logo:'ActionSA.png',
     members:[{name:'Lerato Ngobeni',role:'Chief Whip'}]},
-  { id:'acdp',     name:'ACDP',                           abbr:'ACDP',  color:'#1a3fa8', logo:'ACDP.png',
+  { id:'acdp',     name:'ACDP',                           abbr:'ACDP',  color:'#009cde', logo:'ACDP.png',
     members:[{name:'TBC',tbc:true}]},
-  { id:'udm',      name:'United Democratic Movement',     abbr:'UDM',   color:'#c8a800', logo:'UDM.png',
+  { id:'udm',      name:'United Democratic Movement',     abbr:'UDM',   color:'#007c58', logo:'UDM.png',
     members:[{name:'TBC',tbc:true}]},
-  { id:'rise',     name:'RISE Mzansi',                    abbr:'RISE',  color:'#e83030', logo:'RISE.jpg',
+  { id:'rise',     name:'RISE Mzansi',                    abbr:'RISE',  color:'#000000', logo:'RISE.jpg',
     members:[{name:'TBC',tbc:true}]},
-  { id:'bosa',     name:'BOSA',                           abbr:'BOSA',  color:'#1a1a1a', logo:'BOSA.png',
+  { id:'bosa',     name:'BOSA',                           abbr:'BOSA',  color:'#1c9786', logo:'BOSA.png',
     members:[{name:'Mmusi Maimane',role:'Party Leader'}]},
-  { id:'aljamah',  name:'Al Jama-ah',                     abbr:'AJA',   color:'#c00000', logo:'ALJAMAH.jpg',
+  { id:'aljamah',  name:'Al Jama-ah',                     abbr:'AJA',   color:'#fe0502', logo:'ALJAMAH.jpg',
     members:[{name:'TBC',tbc:true}]},
-  { id:'ncc',      name:'National Coloured Congress',      abbr:'NCC',   color:'#222222', logo:'NCC.png',
+  { id:'ncc',      name:'National Coloured Congress',      abbr:'NCC',   color:'#f02329', logo:'NCC.png',
     members:[{name:'Fadiel Adams',role:'Party Leader'}]},
-  { id:'uat',      name:'United Africans Transformation', abbr:'UAT',   color:'#1a2a6c', logo:'UAT.webp',
+  { id:'uat',      name:'United Africans Transformation', abbr:'UAT',   color:'#373363', logo:'UAT.webp',
     members:[{name:'Wonder Mahlatsi',role:'Party Leader'}]},
 ];
 
