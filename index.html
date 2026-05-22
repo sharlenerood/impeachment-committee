@@ -39,8 +39,10 @@
   .stat-label { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
 
   /* FILTER GRID */
-  .filter-wrap { background: var(--white); border-bottom: 1px solid var(--border); padding: 14px 20px; }
-  .filter-grid { max-width: 860px; margin: 0 auto; display: flex; flex-wrap: wrap; gap: 8px; }
+ <div class="filter-wrap">
+  <p style="font-size:11px; font-weight:600; color:#888; margin-bottom:10px; font-family:'Montserrat',sans-serif; letter-spacing:0.05em; text-transform:uppercase;">Tap a party to filter</p>
+  <div class="filter-grid" id="filterGrid"></div>
+</div>
 
   .filter-btn {
     display: flex; align-items: center; gap: 7px;
@@ -102,7 +104,7 @@
   .party-name { font-size: 24px; font-weight: 800; color: var(--dark); }
   .party-member-count { font-size: 16px; font-weight: 500; color: var(--muted); margin-top: 2px; }
 
-  .members-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; }
+  .members-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; }
   @media (max-width: 380px) { .members-grid { grid-template-columns: 1fr 1fr; } }
 
   .member-card {
@@ -157,7 +159,7 @@
 
 <div class="members-wrap" id="membersWrap"></div>
 
-<div class="footer">News24 · Data current as of May 2026 · ANC members to be confirmed</div>
+<div class="footer">News24 · Data current as of May 2026</div>
 
 <script>
 const parties = [
