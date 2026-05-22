@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Impeachment Committee — News24</title>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --red: #DD1F26;
+    --dark: #111;
+    --mid: #444;
+    --muted: #888;
+    --border: #e5e2dc;
+    --bg: #f7f5f1;
+    --white: #fff;
+  }
+
+  body {
+    background: var(--bg);
+    font-family: 'Montserrat', Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    min-height: 100vh;
+  }
+
+  /* ── TOP BAR ── */
+  .topbar {
+    background: var(--red);
+    padding: 8px 20px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .topbar span {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #fff;
+  }
+  .topbar-dot { width: 3px; height: 3px; border-radius: 50%; background: rgba(255,255,255,0.45); }
+
+  /* ── HEADER ── */
+  .header {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    padding: 32px 20px 24px;
+    max-width: 860px;
+    margin: 0 auto;
+  }
+  .eyebrow {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--red);
+    margin-bottom: 10px;
+  }
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 6vw, 42px);
+    font-weight: 900;
+    line-height: 1.1;
+    color: var(--dark);
+    margin-bottom: 12px;
+    letter-spacing: -0.02em;
+  }
+  h1 em { font-style: italic; color: var(--red); }
+  .deck {
+    font-size: clamp(13px, 2vw, 15px);
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--mid);
+    border-left: 3px solid var(--red);
+    padding-left: 14px;
+    max-width: 600px;
+  }
+  .meta {
+    margin-top: 16px;
+    font-size: 11px;
+    color: var(--muted);
+    font-weight: 400;
+  }
+
+  /* ── STAT BAR ── */
+  .stat-bar {
+    background: var(--dark);
+    padding: 14px 20px;
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+  }
+  .stat {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2px;
+  }
+  .stat-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 24px;
+    font-weight: 900;
+    color: var(--red);
+    line-height: 1;
+  }
+  .stat-label {
+    font-size: 9px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+
+  /* ── FILTER TABS ── */
+  .filter-wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 16px 20px 0;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+  }
+  .filter-scroll {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding-bottom: 0;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+  .filter-scroll::-webkit-scrollbar { display: none; }
+
+  .filter-btn {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 14px;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    background: transparent;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all 0.2s;
+    white-space: nowrap;
+    margin-bottom: 12px;
+  }
+
+  .filter-btn:hover { border-color: #aaa; color: var(--dark); }
+
+  .filter-btn.active {
+    border-color: var(--party-color, var(--red));
+    color: var(--party-color, var(--red));
+    background: color-mix(in srgb, var(--party-color, var(--red)) 8%, transparent);
+  }
+
+  .filter-btn .party-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--party-color, var(--red));
+    flex-shrink: 0;
+  }
+
+  .filter-btn .party-count {
+    background: var(--party-color, #ccc);
+    color: #fff;
+    font-size: 9px;
+    font-weight: 800;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  /* ALL button special */
+  .filter-btn.all-btn.active {
+    border-color: var(--dark);
+    color: var(--dark);
+    background: rgba(0,0,0,0.05);
+  }
+  .filter-btn.all-btn .party-count { background: var(--dark); }
+
+  /* ── MEMBERS GRID ── */
+  .members-wrap {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 20px 20px 48px;
+  }
+
+  .party-group { margin-bottom: 28px; }
+  .party-group.hidden { display: none; }
+
+  .party-heading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--party-color, var(--border));
+  }
+
+  .party-logo-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--party-color, #ccc);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 900;
+    color: #fff;
+    flex-shrink: 0;
+    letter-spacing: -0.02em;
+    overflow: hidden;
+  }
+
+  .party-logo-circle img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 50%;
+  }
+
+  .party-name-wrap { flex: 1; }
+  .party-name {
+    font-size: 13px;
+    font-weight: 800;
+    color: var(--dark);
+    letter-spacing: 0.02em;
+  }
+  .party-member-count {
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-top: 1px;
+  }
+
+  .members-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 8px;
+  }
+
+  @media (max-width: 400px) {
+    .members-grid { grid-template-columns: 1fr 1fr; }
+  }
+
+  .member-card {
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-top: 3px solid var(--party-color, var(--border));
+    border-radius: 3px;
+    padding: 14px 12px;
+    transition: box-shadow 0.2s;
+  }
+
+  .member-card:hover { box-shadow: 0 2px 16px rgba(0,0,0,0.08); }
+
+  .member-card.tbc {
+    opacity: 0.5;
+    border-style: dashed;
+    border-top-style: solid;
+  }
+
+  .member-photo {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 10px;
+    border: 2px solid var(--border);
+  }
+
+  .member-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--party-color, #e0e0e0);
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 800;
+    color: rgba(255,255,255,0.9);
+    letter-spacing: -0.02em;
+  }
+
+  .member-name {
+    font-size: 12px;
+    font-weight: 700;
+    color: var(--dark);
+    line-height: 1.3;
+    margin-bottom: 4px;
+  }
+
+  .member-role {
+    font-size: 10px;
+    font-weight: 400;
+    color: var(--muted);
+    line-height: 1.4;
+  }
+
+  .tbc-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--muted);
+    font-style: italic;
+  }
+
+  /* ── FOOTER ── */
+  .footer {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 16px 20px 40px;
+    border-top: 1px solid var(--border);
+    font-size: 11px;
+    color: #bbb;
+    font-weight: 300;
+  }
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <span>News24</span>
+  <div class="topbar-dot"></div>
+  <span>Investigative</span>
+</div>
+
+<div style="background:#fff; border-bottom:1px solid var(--border);">
+  <div class="header">
+    <div class="eyebrow">Parliament · Section 89 Committee</div>
+    <h1>The <em>impeachment</em><br>committee</h1>
+    <p class="deck">A 31-member multiparty panel has been established to investigate President Cyril Ramaphosa. Tap a party to filter members.</p>
+    <p class="meta">News24 · May 2026</p>
+  </div>
+</div>
+
+<div class="stat-bar">
+  <div class="stat"><span class="stat-num">31</span><span class="stat-label">Total members</span></div>
+  <div class="stat"><span class="stat-num">14</span><span class="stat-label">Parties</span></div>
+  <div class="stat"><span class="stat-num">9</span><span class="stat-label">ANC seats</span></div>
+</div>
+
+<!-- FILTER TABS -->
+<div class="filter-wrap">
+  <div class="filter-scroll" id="filterScroll"></div>
+</div>
+
+<!-- MEMBERS -->
+<div class="members-wrap" id="membersWrap"></div>
+
+<div class="footer">News24 · Data current as of May 2026 · ANC members to be confirmed</div>
+
+<script>
+const parties = [
+  {
+    id: 'anc',
+    name: 'African National Congress',
+    abbr: 'ANC',
+    color: '#007A4D',
+    logo: null,
+    members: [
+      { name: 'TBC', role: null, tbc: true },
+      { name: 'TBC', role: null, tbc: true },
+      { name: 'TBC', role: null, tbc: true },
+      { name: 'TBC', role: null, tbc: true },
+      { name: 'TBC', role: null, tbc: true },
+      { name: 'TBC', role: null, tbc: true },
+      { name: 'TBC', role: null, tbc: true },
+      { name: 'TBC', role: null, tbc: true },
+      { name: 'TBC', role: null, tbc: true },
+    ]
+  },
+  {
+    id: 'da',
+    name: 'Democratic Alliance',
+    abbr: 'DA',
+    color: '#003DA5',
+    logo: null,
+    members: [
+      { name: 'George Michalakis', role: 'Parliamentary Leader' },
+      { name: 'Bax Nodada', role: 'Deputy Chief Whip' },
+      { name: 'Adv Glynnis Breytenbach', role: 'Chief Whip' },
+      { name: 'Karabo Khakhau', role: 'Party national spokesperson' },
+      { name: 'Nazley Sharif', role: null },
+    ]
+  },
+  {
+    id: 'mk',
+    name: 'MK Party',
+    abbr: 'MK',
+    color: '#1a7a1a',
+    logo: null,
+    members: [
+      { name: 'John Hlophe', role: 'Parliamentary Leader' },
+      { name: 'Mmabatho Mokoena-Zondi', role: 'Chief Whip' },
+      { name: 'Dr Khanyisile Litchfield-Tshabalala', role: null },
+    ]
+  },
+  {
+    id: 'eff',
+    name: 'Economic Freedom Fighters',
+    abbr: 'EFF',
+    color: '#CC0000',
+    logo: null,
+    members: [
+      { name: 'Julius Malema', role: 'Party Leader' },
+      { name: 'TBC', role: null, tbc: true },
+    ]
+  },
+  {
+    id: 'pa',
+    name: 'Patriotic Alliance',
+    abbr: 'PA',
+    color: '#2d7a2d',
+    logo: null,
+    members: [
+      { name: 'Marlon Daniels', role: 'Chief Whip' },
+    ]
+  },
+  {
+    id: 'ifp',
+    name: 'Inkatha Freedom Party',
+    abbr: 'IFP',
+    color: '#c8a800',
+    logo: null,
+    members: [
+      { name: 'TBC', role: null, tbc: true },
+    ]
+  },
+  {
+    id: 'atm',
+    name: 'African Transformation Movement',
+    abbr: 'ATM',
+    color: '#5bc8e8',
+    logo: null,
+    members: [
+      { name: 'Vuyo Zungula', role: 'Parliamentary Leader' },
+    ]
+  },
+  {
+    id: 'ffplus',
+    name: 'Freedom Front Plus',
+    abbr: 'FF+',
+    color: '#E07820',
+    logo: null,
+    members: [
+      { name: 'TBC', role: null, tbc: true },
+    ]
+  },
+  {
+    id: 'actionsa',
+    name: 'ActionSA',
+    abbr: 'ASA',
+    color: '#F4A800',
+    logo: null,
+    members: [
+      { name: 'Lerato Ngobeni', role: 'Chief Whip' },
+    ]
+  },
+  {
+    id: 'acdp',
+    name: 'ACDP',
+    abbr: 'ACDP',
+    color: '#1a3fa8',
+    logo: null,
+    members: [
+      { name: 'TBC', role: null, tbc: true },
+    ]
+  },
+  {
+    id: 'udm',
+    name: 'United Democratic Movement',
+    abbr: 'UDM',
+    color: '#c8a800',
+    logo: null,
+    members: [
+      { name: 'TBC', role: null, tbc: true },
+    ]
+  },
+  {
+    id: 'rise',
+    name: 'RISE Mzansi',
+    abbr: 'RISE',
+    color: '#222222',
+    logo: null,
+    members: [
+      { name: 'TBC', role: null, tbc: true },
+    ]
+  },
+  {
+    id: 'bosa',
+    name: 'BOSA',
+    abbr: 'BOSA',
+    color: '#2255aa',
+    logo: null,
+    members: [
+      { name: 'Mmusi Maimane', role: 'Party Leader' },
+    ]
+  },
+  {
+    id: 'aljamah',
+    name: 'Al Jama-ah',
+    abbr: 'AJA',
+    color: '#c00000',
+    logo: null,
+    members: [
+      { name: 'TBC', role: null, tbc: true },
+    ]
+  },
+  {
+    id: 'ncc',
+    name: 'National Coloured Congress',
+    abbr: 'NCC',
+    color: '#222222',
+    logo: null,
+    members: [
+      { name: 'Fadiel Adams', role: 'Party Leader' },
+    ]
+  },
+  {
+    id: 'uat',
+    name: 'United Africans Transformation',
+    abbr: 'UAT',
+    color: '#1a2a6c',
+    logo: null,
+    members: [
+      { name: 'Wonder Mahlatsi', role: 'Party Leader' },
+    ]
+  },
+];
+
+const filterScroll = document.getElementById('filterScroll');
+const membersWrap = document.getElementById('membersWrap');
+let activeFilter = 'all';
+
+// Build ALL button
+const allBtn = document.createElement('button');
+allBtn.className = 'filter-btn all-btn active';
+allBtn.innerHTML = `<span class="party-count" style="background:#111;">31</span> All parties`;
+allBtn.onclick = () => setFilter('all');
+filterScroll.appendChild(allBtn);
+
+// Build party filter buttons + member groups
+parties.forEach(party => {
+  // Filter button
+  const btn = document.createElement('button');
+  btn.className = 'filter-btn';
+  btn.style.setProperty('--party-color', party.color);
+  btn.dataset.partyId = party.id;
+  const realCount = party.members.filter(m => !m.tbc).length;
+  const tbcCount = party.members.filter(m => m.tbc).length;
+  btn.innerHTML = `
+    <span class="party-dot"></span>
+    ${party.abbr}
+    <span class="party-count">${party.members.length}</span>
+  `;
+  btn.onclick = () => setFilter(party.id);
+  filterScroll.appendChild(btn);
+
+  // Member group
+  const group = document.createElement('div');
+  group.className = 'party-group';
+  group.dataset.partyId = party.id;
+
+  const logoHTML = party.logo
+    ? `<img src="${party.logo}" alt="${party.name}" style="width:100%;height:100%;object-fit:cover;border-radius:50%;">`
+    : `${party.abbr.substring(0,3)}`;
+
+  group.innerHTML = `
+    <div class="party-heading" style="--party-color:${party.color};">
+      <div class="party-logo-circle" style="background:${party.color};">${logoHTML}</div>
+      <div class="party-name-wrap">
+        <div class="party-name">${party.name}</div>
+        <div class="party-member-count">${party.members.length} member${party.members.length !== 1 ? 's' : ''} on committee${tbcCount > 0 ? ` · ${tbcCount} TBC` : ''}</div>
+      </div>
+    </div>
+    <div class="members-grid">
+      ${party.members.map(m => {
+        if (m.tbc) {
+          return `
+            <div class="member-card tbc" style="--party-color:${party.color};">
+              <div class="member-avatar" style="background:#ddd; color:#aaa;">?</div>
+              <div class="tbc-label">To be confirmed</div>
+            </div>
+          `;
+        }
+        const initials = m.name.split(' ').filter(w => /^[A-Z]/.test(w)).slice(0,2).map(w => w[0]).join('');
+        return `
+          <div class="member-card" style="--party-color:${party.color};">
+            <div class="member-avatar" style="background:${party.color};">${initials}</div>
+            <div class="member-name">${m.name}</div>
+            ${m.role ? `<div class="member-role">${m.role}</div>` : ''}
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+
+  membersWrap.appendChild(group);
+});
+
+function setFilter(id) {
+  activeFilter = id;
+
+  // Update buttons
+  document.querySelectorAll('.filter-btn').forEach(btn => btn.classList.remove('active'));
+  if (id === 'all') {
+    allBtn.classList.add('active');
+  } else {
+    document.querySelector(`.filter-btn[data-party-id="${id}"]`).classList.add('active');
+  }
+
+  // Show/hide groups
+  document.querySelectorAll('.party-group').forEach(group => {
+    if (id === 'all' || group.dataset.partyId === id) {
+      group.classList.remove('hidden');
+    } else {
+      group.classList.add('hidden');
+    }
+  });
+}
+</script>
+</body>
+</html>
