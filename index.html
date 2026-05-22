@@ -27,7 +27,7 @@
   .header-wrap { background: var(--white); border-bottom: 1px solid var(--border); }
   .header { max-width: 860px; margin: 0 auto; padding: 32px 20px 24px; }
   .eyebrow { font-size: 10px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--red); margin-bottom: 10px; }
-  h1 { font-family: 'Playfair Display', serif; font-size: clamp(32px, 7vw, 56px); font-weight: 900; line-height: 1.1; color: var(--dark); margin-bottom: 12px; letter-spacing: -0.02em; }
+  h1 { font-family: 'Playfair Display', serif; font-size: clamp(36px, 9vw, 60px); font-weight: 900; line-height: 1.1; color: var(--dark); margin-bottom: 12px; letter-spacing: -0.02em; }
   h1 em { font-style: italic; color: var(--red); }
   .deck { font-size: clamp(13px, 2vw, 15px); font-weight: 300; line-height: 1.7; color: var(--mid); border-left: 3px solid var(--red); padding-left: 14px; max-width: 600px; }
   .meta { margin-top: 16px; font-size: 11px; color: var(--muted); font-weight: 400; }
@@ -35,8 +35,8 @@
   /* STAT BAR */
   .stat-bar { background: #555; padding: 14px 20px; display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
   .stat { display: flex; flex-direction: column; align-items: center; gap: 2px; }
-  .stat-num { font-family: 'Playfair Display', serif; font-size: 30px; font-weight: 900; color: #fff; line-height: 1; }
-  .stat-label { font-size: 13px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 22px; font-weight: 900; color: #fff; line-height: 1; }
+  .stat-label { font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(255,255,255,0.6); }
 
   /* FILTER GRID */
   .filter-wrap { background: var(--white); border-bottom: 1px solid var(--border); padding: 14px 20px; }
@@ -49,7 +49,7 @@
     border-radius: 4px;
     background: transparent;
     font-family: 'Montserrat', sans-serif;
-    font-size: 14px; font-weight: 700;
+    font-size: 16px; font-weight: 700;
     color: var(--muted);
     cursor: pointer;
     transition: all 0.18s;
@@ -62,17 +62,17 @@
     background: color-mix(in srgb, var(--party-color, var(--red)) 8%, transparent);
   }
   .filter-logo {
-    width: 30px; height: 30px; border-radius: 50%;
+    width: 35px; height: 35px; border-radius: 50%;
     object-fit: cover; flex-shrink: 0;
     background: #eee;
   }
   .filter-dot {
-    width: 15px; height: 15px; border-radius: 50%;
+    width: 20px; height: 20px; border-radius: 50%;
     background: var(--party-color, #ccc); flex-shrink: 0;
   }
   .filter-count {
     background: var(--party-color, #ccc);
-    color: #fff; font-size: 12px; font-weight: 800;
+    color: #fff; font-size: 16px; font-weight: 800;
     min-width: 18px; height: 18px; border-radius: 9px;
     display: flex; align-items: center; justify-content: center;
     padding: 0 4px; flex-shrink: 0;
@@ -99,8 +99,8 @@
     border: 2px solid rgba(0,0,0,0.08);
   }
   .party-logo-circle img { width: 100%; height: 100%; object-fit: cover; border-radius: 50%; }
-  .party-name { font-size: 30px; font-weight: 800; color: var(--dark); }
-  .party-member-count { font-size: 20px; font-weight: 500; color: var(--muted); margin-top: 2px; }
+  .party-name { font-size: 24px; font-weight: 800; color: var(--dark); }
+  .party-member-count { font-size: 16px; font-weight: 500; color: var(--muted); margin-top: 2px; }
 
   .members-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; }
   @media (max-width: 380px) { .members-grid { grid-template-columns: 1fr 1fr; } }
@@ -122,9 +122,9 @@
     display: flex; align-items: center; justify-content: center;
     font-size: 24px; font-weight: 800; color: rgba(255,255,255,0.9);
   }
-  .member-name { font-size: 24px; font-weight: 700; color: var(--dark); line-height: 1.3; margin-bottom: 4px; }
-  .member-role { font-size: 20px; font-weight: 400; color: var(--muted); line-height: 1.4; }
-  .tbc-label { font-size: 20px; font-weight: 600; color: var(--muted); font-style: italic; }
+  .member-name { font-size: 22px; font-weight: 700; color: var(--dark); line-height: 1.3; margin-bottom: 4px; }
+  .member-role { font-size: 18px; font-weight: 400; color: var(--muted); line-height: 1.4; }
+  .tbc-label { font-size: 18px; font-weight: 600; color: var(--muted); font-style: italic; }
 
   /* FOOTER */
   .footer { max-width: 860px; margin: 0 auto; padding: 16px 20px 40px; border-top: 1px solid var(--border); font-size: 11px; color: #bbb; font-weight: 300; }
